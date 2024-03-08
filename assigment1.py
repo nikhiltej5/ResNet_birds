@@ -29,18 +29,6 @@ val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 # Accessing labels:
 # print("Labels:", train_dataset.classes)
 
-# examples = iter(train_loader)
-# samples, labels = next(examples)
-# print(samples.shape, labels.shape)
-
-# def show_batch(dl):
-#     for images, labels in dl:
-#         fig, ax = plt.subplots(figsize=(12, 12))
-#         ax.set_xticks([]); ax.set_yticks([])
-#         ax.imshow(make_grid(images[:64], nrow=8).permute(1, 2, 0))
-#         break
-# show_batch(train_loader)
-
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
@@ -136,7 +124,7 @@ class ResNet(nn.Module):
                 if (i+1)%200 == 0:
                     print(f'epoch {epoch+1}/{num_epochs},step {i+1}/{total_step}, loss = {loss.item():.4f}')
 
-    def validate(num_classes):
+    def validate(self,num_classes):
         with torch.no_grad():
             n_correct = 0
             n_samples = 0
